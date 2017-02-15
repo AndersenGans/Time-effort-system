@@ -1,0 +1,36 @@
+﻿@model WebSite.Models.SignupModel
+
+@{
+    ViewBag.Title = "Sign Up";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<center>
+    <h4 class="page-header">Sign Up</h4><br />
+    <div class="panel-body">
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary()
+            <div class="form-group">
+                <label>Name:</label>
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Surname:</label>
+                @Html.TextBoxFor(m => m.Surname, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Middle Name:</label>
+                @Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Email:</label>
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Login:</label>
+                @Html.TextBoxFor(m => m.Login, new { @class = "form-control" })
+            </div>
+            <input type="submit" value="Sign Up" class="btn btn-primary" />
+        }
+    </div>
+</center>

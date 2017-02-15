@@ -1,0 +1,103 @@
+﻿@model WebSite.Models.ManageProjectManagementModel
+
+@{
+    ViewBag.Title = "EditProject";
+}
+
+<h4 class="page-header">Edit project</h4>
+
+@using (Html.BeginForm("UpdateProject", "ProjectManagement", FormMethod.Post, new { @id = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" id="EditProject">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <input type="hidden" form="form" value="@Model.ProjectId" name="ProjectId">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProjectName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProjectName, new { htmlAttributes = new { @class = "form-control", form = "form" } })
+                @Html.ValidationMessageFor(model => model.ProjectName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", form = "form" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Task, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Task, new SelectList(Model.Task, "TaskId", "Title"), new { @class = "table-row-input", id = "dropDownListTasks" })
+                @Html.ValidationMessageFor(model => model.Task, "", new { @class = "text-danger" })
+                <input type="button" value="Add" class="btn btn-default" onclick="AddTasks()" />
+
+                <!--Нужен для генерация html кода-->
+                <table id="AddTasks" class="table">
+                    @if (Model.TasksInProject != null)
+                    {
+                        foreach (var project in Model.TasksInProject)
+                        {
+                            <tr class='GenerationHtmlCode'>
+                                <input type='hidden' value="@project.TaskId" name='idTasks' form='form' />
+                                <td>@project.Title</td>
+                                <td>
+                                    <input type='button' value='Delete' class='btn btn-default' onclick='DeleteHtml(this)' />
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TeamMember, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.TeamMember, new SelectList(Model.TeamMember, "AccountId", "NameSurname"), new { @class = "table-row-input", id = "dropDownListTeamMember" })
+                @Html.ValidationMessageFor(model => model.TeamMember, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.Role, new SelectList(Model.Role, "RoleId", "Name"), new { @class = "table-row-input", id = "dropDownListRole" })
+                @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
+
+                <input type="button" value="Add" class="btn btn-default" onclick="AddTeamMember()" />
+
+                <!--Нужен для генерация html кода-->
+                <table id="AddTeamMember" class="table">
+                    @if (Model.TeammatesInProject != null)
+                    {
+                        foreach (var project in Model.TeammatesInProject)
+                        {
+                            <tr class='GenerationHtmlCode'>
+                                <input type='hidden' value="@project.AccountId" name='idTeamMember' form='form' />
+                                <input type='hidden' value="@project.RoleId" name='idRoleInProject' form='form' />
+                                <td>@project.Account.NameSurname</td>
+                                <td>@project.Role.Name</td>
+                                <td>
+                                    <input type='button' value='Delete' class='btn btn-default' onclick='DeleteHtml(this)' />
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save project" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

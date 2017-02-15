@@ -1,0 +1,41 @@
+﻿@model WebSite.Models.AccountModel
+
+@{
+    ViewBag.Title = "Edit User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<center>
+    <h4 class="page-header">Edit</h4><br />
+    <div class="panel-body">
+        @using (Html.BeginForm("Update","AdminArea", FormMethod.Post, new { @id = "form" }))
+        {
+            @Html.ValidationSummary()
+            <input type="hidden" form="form" value="@Model.AccountId" name="AccountId">
+            <div class="form-group">
+                <label>Name:</label>
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Surname:</label>
+                @Html.TextBoxFor(m => m.Surname, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Middle Name:</label>
+                @Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Email:</label>
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Login:</label>
+                @Html.TextBoxFor(m => m.Login, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Access Level:</label>
+                @Html.TextBoxFor(m => m.AccessLevel, new { @class = "form-control" })
+            </div>
+            <input type="submit" value="Save" class="btn btn-primary" />
+        }
+    </div>
+</center>

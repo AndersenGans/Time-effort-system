@@ -1,0 +1,50 @@
+﻿@using WebSite.Models
+
+@model IEnumerable<TimeReportModel>
+
+<table class="table">
+    <tr>
+        <th><input type="checkbox" class="checkALL" onclick="Check()" /></th>
+        <th>Project</th>
+        <th>Task</th>
+        <th>Effort</th>
+        <th>Overtime</th>
+        <th>Description</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Status</th>
+        @if (User.IsInRole("1") || User.IsInRole("2"))
+            {
+            <th class="text-center">Actions</th>
+        }
+    </tr>
+
+
+    @foreach (TimeReportModel report in Model)
+    {
+        <tr>
+            @Html.Hidden("reportId", report.Id)
+            <!--
+            Добавлен checkbox каждому отчету.
+            Для использования на других страницах необходимо добавить к checkbox класс "timeReports".
+            -->
+            <td><input type="checkbox" class="timeReports" /></td>
+            <td>@report.ProjectName</td>
+            <td>@report.TaskName</td>
+            <td>@report.SpentHours.Effort</td>
+            <td>@report.SpentHours.Overtime</td>
+            <td>@report.Description</td>
+            <td>@report.TimeInterval.StartDate.ToShortDateString()</td>
+            <td>@report.TimeInterval.EndDate.ToShortDateString()</td>
+            <td>@report.Status</td>
+            <td>
+                @if (report.Status == ETS.Contracts.DataContracts.ReportStatus.Open.ToString() && (User.IsInRole("1") || User.IsInRole("2"))) //todo: почему по ролям?!
+                {
+                    <input type="button" value="Edit" class="btn btn-default" onclick="editTimeReport(@report.Id, this)" />
+                        <input type="button" value="Delete" class="btn btn-default" onclick="location.href='@Url.Action("DeleteTimeReport", "TimeReports", new { id = @report.Id })'" />
+                        @*<input type="button" value="Notify" class="btn btn-default" onclick="location.href='@Url.Action("NotifyTimeReport", "TimeReports", new { id = @report.Id })'" />*@
+                }
+            </td>
+        </tr>
+    }
+</table>

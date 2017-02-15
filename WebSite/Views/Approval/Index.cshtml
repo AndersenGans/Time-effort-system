@@ -1,0 +1,140 @@
+﻿@using ETS.Contracts.DataContracts
+@using WebSite.Models
+
+@model IEnumerable<ApprovalModel>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4 class="page-header">Approval</h4><br />
+
+
+
+<script type="text/javascript">
+
+    window.EDIT_REPORT_URL = '@Url.Action("EditTimeReport", "TimeReports")';
+    window.PROJECT_NAME_URL = '@Url.Action("FilterProjectName", "Approval")';
+
+</script>
+
+<!--filters label-->
+<div class="div-name-filters">
+    <p>
+        <label class="label-name-filters">Team member</label>
+    </p>
+    <p>
+        <label class="label-name-filters">Project</label>
+    </p>
+    <p>
+        <label class="label-name-filters">Show records from</label>
+    </p>
+    <p align="right">
+        <label class="label-name-filters">to</label>
+    </p>
+    <p>
+        <label class="label-name-filters">Show records for</label>
+    </p>
+</div>
+
+
+<!--filters implement-->
+<div class="div-filters">
+    <p>
+        <select style="height:25px">
+            @foreach (ApprovalModel report in Model)
+            {
+                <option>@report.TeamMember</option>
+            }
+        </select>
+    </p>
+    <p>
+        <select class="select" style="height: 25px" id="ProjectApproval_Project" onchange="FilterProjectName(this, this.value)">
+            <option value="-1">All projects</option>
+            @foreach (ApprovalModel report in Model)
+            {
+                <option>@report.Project </option>
+            }
+        </select>
+
+    </p>
+    <p>
+        <input type="date" />
+    </p>
+    <p>
+        <input type="date" />
+    </p>
+    <p>
+        <select class="select" style="height:25px">
+            <option>a week</option>
+            <option>a month</option>
+        </select>
+    </p>
+</div>
+
+
+<div class="div-status">
+    <label class="label-status">Status</label>
+    <div class="div-checkbox-status">
+        <input type="checkbox"> Accepted<br />
+        <input type="checkbox"> Declined<br />
+        <input type="checkbox"> Notified<br />
+    </div>
+</div>
+
+
+
+<div>
+    <table class="table">
+        <tr>
+            @*<th><input type="checkbox" class="checkALL"/></th>*@
+            <th>Team member</th>
+            <th>Project</th>
+            <th>Task</th>
+            <th>Effort</th>
+            <th>Overtime</th>
+            <th>Description</th>
+            <th>Start date</th>
+            <th>Completion date</th>
+            <th>Status</th>
+            @if (User.IsInRole("1") || User.IsInRole("2"))
+            {
+            <th class="text-center">Actions</th>
+            }
+        </tr>
+
+
+        @foreach (ApprovalModel approval in Model)
+        {
+                 <tr>
+                     <td>@approval.TeamMember</td>
+                     <td>@approval.Project</td>
+                     <td>@approval.Task</td>
+                     <td>@approval.Effort</td>
+                     <td>@approval.Overtime</td>
+                     <td>@approval.Description</td>
+                     <td>@approval.StartDate.ToShortDateString()</td>
+                <td>@approval.EndDate.ToShortDateString()</td>
+                     <td>@approval.Status</td>
+
+                    @if (User.IsInRole("1") || User.IsInRole("2"))
+                    {
+                     <td>
+                         @if (approval.Status == ReportStatus.Notified)
+                         {
+                                <input type="button" value="Accept" class="btn btn-default" onclick="location.href = '@Url.Action("Accept", "Approval", new { id = @approval.Id })'" />
+                                <input type="button" value="Decline" class="btn btn-default" onclick="location.href = '@Url.Action("Decline", "Approval", new { id = @approval.Id })'" />
+                         }
+                         @if (approval.Status == ReportStatus.Accepted || approval.Status == ReportStatus.Declined)
+                         {
+                                <input type="button" value="Accept" disabled class="btn btn-default" />
+                                <input type="button" value="Decline" disabled class="btn btn-default" />
+                         }
+                     </td>
+                    }
+                 </tr>
+             }
+    </table>
+</div>

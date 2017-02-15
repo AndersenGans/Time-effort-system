@@ -1,0 +1,23 @@
+﻿@using WebSite.Models
+
+@model IEnumerable<TimeEffortModel>
+
+<table class="table">
+    <tr>
+        <th>Project</th>
+        <th>Effort</th>
+        <th>Overtime</th>
+        <th>Total</th>
+    </tr>
+
+
+    @foreach (var projectEffort in Model)
+    {
+        <tr>
+            <td>@projectEffort.ProjectName</td>
+            <td>@projectEffort.Effort</td>
+            <td>@projectEffort.Overtime</td>
+            <td>@projectEffort.Total</td>
+        </tr>
+    }
+</table>

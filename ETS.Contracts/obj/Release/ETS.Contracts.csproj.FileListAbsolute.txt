@@ -1,0 +1,11 @@
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.Contracts\bin\Release\ETS.Contracts.dll
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.Contracts\bin\Release\ETS.Contracts.pdb
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.Contracts\bin\Release\EntityFramework.dll
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.Contracts\bin\Release\EntityFramework.SqlServer.dll
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.Contracts\bin\Release\EntityFramework.xml
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.Contracts\bin\Release\EntityFramework.SqlServer.xml
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.Contracts\bin\Release\ru\EntityFramework.resources.dll
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.Contracts\bin\Release\ru\EntityFramework.SqlServer.resources.dll
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.Contracts\obj\Release\ETS.Contracts.dll
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.Contracts\obj\Release\ETS.Contracts.pdb
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.Contracts\obj\Release\ETS.Contracts.csprojResolveAssemblyReference.cache

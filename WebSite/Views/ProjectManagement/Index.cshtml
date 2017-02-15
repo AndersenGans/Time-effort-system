@@ -1,0 +1,83 @@
+﻿@using WebSite.Models
+
+@model IEnumerable<ProjectManagementModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<script type="text/javascript">
+    window.PROJECT_INDEX_URL = '@Url.Action("Index", "ProjectManagement")';
+    window.PROJECT_NAME_URL = '@Url.Action("FilterProjectName", "ProjectManagement")';
+    window.PROJECT_MANAGER_URL = '@Url.Action("FilterProjectManager", "ProjectManagement")';
+</script>
+
+<h4 class="page-header">Project management</h4><br />
+
+<div class="div-name-filters">
+    <p>
+        <label class="label-name-filters">Project</label>
+    </p>
+    <p>
+        <label class="label-name-filters">Project manager</label>
+    </p>
+</div>
+
+
+<div class="div-filters">
+    <p>
+        <select class="select" style="height: 25px" id="ProjectManagement_Project" onchange="FilterProjectName(this, this.value)">
+            <option value="-1">All projects</option>
+            @foreach (ProjectManagementModel project in Model)
+            {
+                <option value="@project.Id">@project.ProjectName</option>
+            }
+        </select>
+    </p>
+    <p>
+        <select style="height: 25px" id="ProjectManagement_Manager" onchange="FilterProjectManager(this, this.value)">
+            @foreach (ProjectManagementModel project in Model)
+            {
+                if (project.ProjectManager != "Нет менеджера")
+                {
+                    <option value="@project.ProjectManager">@project.ProjectManager</option>
+                }
+            }
+        </select>
+    </p>
+</div>
+
+
+<table class="table">
+    <tr>
+        <th>Project</th>
+        <th>Project Manager</th>
+        <th>Description</th>
+@if (User.IsInRole("1"))
+{
+            <th>Actions</th>
+        }
+    </tr>
+
+    @foreach (ProjectManagementModel report in Model)
+    {
+        <tr>
+            <td>@report.ProjectName</td>
+            <td>@report.ProjectManager</td>
+            <td>@report.Description</td>
+@if (User.IsInRole("1"))
+{
+            <td>
+                @Html.ActionLink("Delete", "DeleteProject", "ProjectManagement", new { id = @report.Id }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Edit", "EditProject", "ProjectManagement", new { id = @report.Id }, new { @class = "btn btn-default" })
+            </td>
+            }
+        </tr>
+    }
+</table>
+@if (User.IsInRole("1"))
+{
+<p>
+    @Html.ActionLink("New project", "EditProject", "ProjectManagement", new { id = Model.Last().Id + 1 }, new { @class = "btn btn-default" })
+</p>
+}

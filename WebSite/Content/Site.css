@@ -1,0 +1,116 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/*TimeReports*/
+.div-name-filters{
+    display:inline-block;
+    margin-top:20px;
+}
+
+.div-filters{
+    display:inline-block;
+    margin-left:20px;
+}
+
+.div-status{
+    display:inline-block;
+    margin-top:60px; 
+    vertical-align:top;
+}
+
+
+.div-checkbox-status{
+    display:inline-block; 
+    margin-left:50px;
+}
+
+.div-avtorization {
+    /*display: inline-block;
+    vertical-align: top;
+    margin-left:100px;*/
+}
+
+
+.label-status{
+    margin-left:50px; 
+    display:inline-block;
+    vertical-align:top;
+}
+
+.label-name-filters{
+    margin-left:40px;
+}
+
+
+.combo-box-account{
+    float:right;
+    margin-top:35px;
+    width:200px;
+}
+
+
+.name-system{
+    display:inline-block;
+}
+
+
+.div-button-submit{
+    display:inline-block;
+    float:right;
+    margin-top:190px;
+}
+
+.button-submit{
+    width:130px;
+    height:30px;
+    color: #333333;
+  background-color: #ffffff;
+  border-color: #cccccc;
+}
+a {margin: 0 20px;}
+
+.table-row-input {
+    width: 100%;
+}
+/*TimeReports*/
+
+/*Approval*/
+.btn-accept-decline{
+    float:right;
+    display: inline-block;
+    margin-top:160px;
+}
+/*Approval*/
+
+
+
+/*EditProject*/
+
+#EditProject textarea{
+    width: 294px;
+    height: 110px;
+}
+
+/*EditProject*/

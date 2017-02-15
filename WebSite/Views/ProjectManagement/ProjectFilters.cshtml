@@ -1,0 +1,25 @@
+﻿@using WebSite.Models
+
+@model IEnumerable<ProjectManagementModel>
+
+<table class="table">
+    <tr>
+        <th>Project</th>
+        <th>Project Manager</th>
+        <th>Description</th>
+        <th></th>
+    </tr>
+
+    @foreach (ProjectManagementModel report in Model)
+    {
+        <tr>
+            <td>@report.ProjectName</td>
+            <td>@report.ProjectManager</td>
+            <td>@report.Description</td>
+            <td>
+                @Html.ActionLink("Delete", "DeleteProject", "ProjectManagement", new { id = @report.Id }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Edit", "EditProject", "ProjectManagement", new { id = @report.Id }, new { @class = "btn btn-default" })
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,141 @@
+﻿@using WebSite.Models
+
+@model IEnumerable<ComboProjectTimeReports>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+<script type="text/javascript">
+    window.CREATE_REPORT_URL = '@Url.Action("CreateTimeReport", "TimeReports")';
+    window.EDIT_REPORT_URL = '@Url.Action("EditTimeReport", "TimeReports")';
+    @*window.SAVE_REPORT_URL = '@Url.Action("Save", "TimeReports")';*@
+    window.DELETE_REPORT_URL = '@Url.Action("DeleteTimeReport", "TimeReports")';
+    window.NOTIFY_REPORT_URL = '@Url.Action("NotifyTimeReport", "TimeReports")';
+    window.PROJECT_NAME_URL = '@Url.Action("FilterProjectName", "TimeReports")';
+    window.FilterWeekOrMonth_URL = '@Url.Action("FilterWeekOrMonth", "TimeReports")';
+    window.FilterDate_URL = '@Url.Action("FilterDate", "TimeReports")';
+    window.FilterDateEnd_URL = '@Url.Action("FilterDateEnd", "TimeReports")';
+</script>
+
+<h4 class="page-header">Time reports</h4><br />
+
+<div class="div-name-filters">
+    <p>
+        <label class="label-name-filters">Team member</label>
+    </p>
+    <p>
+        <label class="label-name-filters">Project</label>
+    </p>
+    <p>
+        <label class="label-name-filters">Show records from</label>
+    </p>
+    <p>
+        <label class="label-name-filters">to</label>
+    </p>
+    <p>
+        <label class="label-name-filters">Show records for</label>
+    </p>
+</div>
+
+<div class="div-filters">
+    <p>
+        <label class="label-name-filters"> @Model.First().CurrentUser </label>
+    </p>
+    <p>
+        <select class="select" style="height: 25px" id="ProjectTimeReports_Project" onchange="FilterProjectName(this, this.value)">
+            <option value="-1">All projects</option>
+            @foreach (var project in Model.First().Projects)
+            {
+                <option value="@project.Id">@project.ProjectName</option>
+            }
+        </select>
+    </p>
+    <p>
+        <input type="date" id="TimeReports_FilterDate" onchange="FilterDate(this, this.value)" />
+</p>
+    <p>
+        <input type="date" id="TimeReports_FilterDateEnd" onchange="FilterDateEnd(this, this.value)" />
+    </p>
+    <p>
+        <select class="select" style="height: 25px" id="TimeReports_FilterWeekOrMonth" onchange="FilterWeekOrMonth(this, this.value)">
+            <option value="Select period">Select period</option>
+            <option value="A week">A week</option>
+            <option value="A month">A month</option>
+        </select>
+    </p>
+</div>
+
+
+<div class="div-status">
+    <label class="label-status">Status</label>
+    <div class="div-checkbox-status">
+        <input type="checkbox"> Accepted<br />
+        <input type="checkbox"> Declined<br />
+        <input type="checkbox"> Send<br />
+        <input type="checkbox"> Open<br />
+    </div>
+</div>
+
+
+
+
+@using (Html.BeginForm("Save", "TimeReports", FormMethod.Post))
+{
+    <table class="table">
+        <tr>
+            <!--
+            Добавлен checkbox для выделения всех отчетов.
+            Для использования на других страницах необходимо добавить к checkbox (который должен выделять всё) класс "checkALL".
+            -->
+            <th style="width:5%"><input type="checkbox" class="checkALL" onclick="Check()" /></th>
+            <th style="width:15%">Project</th>
+            <th style="width:15%">Task</th>
+            <th style="width:5%">Effort</th>
+            <th style="width:5%">Overtime</th>
+            <th style="width:15%">Description</th>
+            <th style="width:10%">Start date</th>
+            <th style="width:10%">End date</th>
+            <th style="width:5%">Status</th>
+            @if (User.IsInRole("1") || User.IsInRole("2"))
+            {
+                <th class="text-center" style="width:15%">Actions</th>
+            }
+        </tr>
+
+        @foreach (var item in Model.First().TimeReport)
+        {
+                <tr>
+                    @Html.Hidden("reportId", item.Id)
+                    <!--
+                    Добавлен checkbox каждому отчету.
+                    Для использования на других страницах необходимо добавить к checkbox класс "timeReports".
+                    -->
+                    <td style="width:5%"><input type="checkbox" class="timeReports" /></td>
+                    <td style="width:15%">@item.ProjectName</td>
+                    <td style="width:15%">@item.TaskName</td>
+                    <td style="width:5%">@item.SpentHours.Effort</td>
+                    <td style="width:5%">@item.SpentHours.Overtime</td>
+                    <td style="width:15%">@item.Description</td>
+                    <td style="width:10%">@item.TimeInterval.StartDate.ToShortDateString()</td>
+                    <td style="width:10%">@item.TimeInterval.EndDate.ToShortDateString()</td>
+                    <td style="width:3%">@item.Status</td>
+                    <td style="width:17%">
+                        @if (item.Status == ETS.Contracts.DataContracts.ReportStatus.Open.ToString() && (User.IsInRole("1") || User.IsInRole("2"))) //todo: почему по ролям?!
+                        {
+                            <input type="button" value="Edit" class="btn btn-default" onclick="editTimeReport(@item.Id, this)" />
+                            <input type="button" value="Delete" class="btn btn-default" onclick="location.href='@Url.Action("DeleteTimeReport", "TimeReports", new { id = @item.Id })'" />
+                            @*<input type="button" value="Notify" class="btn btn-default" onclick="location.href='@Url.Action("NotifyTimeReport", "TimeReports", new { id = @report.Id })'" />*@
+                        }
+                    </td>
+                </tr>
+        }
+    </table>
+}
+@if (User.IsInRole("1") || User.IsInRole("2"))
+{
+<p>
+    <button id="addbutton" class="btn btn-default" onclick="addTimeReport()">Add report</button>
+    <button class="btn btn-default" onclick="NotifySelected()">Notify selected</button>
+</p>
+}

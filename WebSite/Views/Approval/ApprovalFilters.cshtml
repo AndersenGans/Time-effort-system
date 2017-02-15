@@ -1,0 +1,55 @@
+﻿@using ETS.Contracts.DataContracts
+@using WebSite.Models
+
+@model IEnumerable<ApprovalModel>
+
+<table class="table">
+    <tr>
+        <th>Team member</th>
+        <th>Project</th>
+        <th>Task</th>
+        <th>Effort</th>
+        <th>Overtime</th>
+        <th>Description</th>
+        <th>Start date</th>
+        <th>Completion date</th>
+        <th>Status</th>
+        @if (User.IsInRole("1") || User.IsInRole("2"))
+            {
+            <th class="text-center">Actions</th>
+        }
+    </tr>
+
+
+    @foreach (ApprovalModel approval in Model)
+    {
+        <tr>
+            <td>@approval.TeamMember</td>
+            <td>@approval.Project</td>
+            <td>@approval.Task</td>
+            <td>@approval.Effort</td>
+            <td>@approval.Overtime</td>
+            <td>@approval.Description</td>
+            <td>@approval.StartDate.ToShortDateString()</td>
+            <td>@approval.EndDate.ToShortDateString()</td>
+            <td>@approval.Status</td>
+
+            @if (User.IsInRole("1") || User.IsInRole("2"))
+            {
+                <td>
+                    @if (approval.Status == ReportStatus.Notified)
+                    {
+                        <input type="button" value="Accept" class="btn btn-default" onclick="location.href = '@Url.Action("Accept", "Approval", new { id = @approval.Id })'" />
+                                <input type="button" value="Decline" class="btn btn-default" onclick="location.href = '@Url.Action("Decline", "Approval", new { id = @approval.Id })'" />
+                    }
+                    @if (approval.Status == ReportStatus.Accepted || approval.Status == ReportStatus.Declined)
+                    {
+                        <input type="button" value="Accept" disabled />
+                                <input type="button" value="Decline" disabled />
+                    }
+                </td>
+            }
+        </tr>
+    }
+</table>
+

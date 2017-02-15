@@ -1,0 +1,41 @@
+﻿@using WebSite.Models
+
+@model IEnumerable<AccountModel>
+
+@{ 
+    ViewBag.Title = "Admin Control Panel";
+}
+
+<h4 class="page-header">Admin Control Panel</h4><br/>
+
+<table class="table">
+    <tr>
+        <th>Account ID</th>
+        <th>Name</th>
+        <th>Middle Name</th>
+        <th>Surname</th>
+        <th>Email</th>
+        <th>Login</th>
+        <th>Password</th>
+        <th>Access Level</th>
+        <th>Actions</th>
+    </tr>
+    @foreach(var user in Model)
+    {
+        <tr>
+            <td>@user.AccountId</td>
+            <td>@user.Name</td>
+            <td>@user.MiddleName</td>
+            <td>@user.Surname</td>
+            <td>@user.Email</td>
+            <td>@user.Login</td>
+            <td>@user.Password</td>
+            <td>@user.AccessLevel</td>
+            <td>
+                @Html.ActionLink("Re-assign Password", "Reassign", "AdminArea", new { id = @user.AccountId }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Delete", "Delete", "AdminArea", new { id = @user.AccountId }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Edit", "Edit", "AdminArea", new { id = @user.AccountId }, new { @class = "btn btn-default" })
+            </td>
+        </tr>
+    }
+</table>

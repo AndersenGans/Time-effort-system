@@ -1,0 +1,30 @@
+﻿@model WebSite.Models.ManageTimeReportModel
+
+<tr id="timeReportRow">
+    @Html.HiddenFor(m => m.Id)
+    <td style="width:5%"><input type="checkbox" class="timeReports" /></td>
+    <td style="width:15%">
+        @Html.DropDownListFor(m => m.ProjectId, new SelectList(Model.Projects, "ProjectId", "Name"), new { @class = "form-control" })
+        @*@Html.TextBoxFor(m => m.ProjectId, new { @class = "table-row-input" })*@
+    </td>
+    <td style="width:15%">
+        @Html.DropDownListFor(m => m.TaskId, new SelectList(Model.Tasks, "TaskId", "Title"), new { @class = "form-control" })
+    </td>
+    <td style="width:5%">
+        @Html.TextBoxFor(m => m.SpentHours.Effort, new { @class = "form-control" })
+    </td>
+    <td style="width:5%">
+        @Html.TextBoxFor(m => m.SpentHours.Overtime, new { @class = "form-control" })
+    </td>
+    <td style="width:15%">
+
+        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+    </td>
+    <td style="width:10%">
+        @Html.TextBoxFor(m => m.TimeInterval.StartDate, new { @class = "form-control", type = "date" })
+    </td>
+    <td style="width:10%">
+        @Html.TextBoxFor(m => m.TimeInterval.EndDate, new { @class = "form-control", type = "date" })
+    </td>
+    <td style="width:20%"><button type="submit" class="btn btn-primary">Save</button></td>
+</tr>

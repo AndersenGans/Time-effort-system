@@ -1,0 +1,36 @@
+﻿@model WebSite.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<center>
+    @if (Model.PreviousUrl != null && Model.PreviousUrl.Contains("/AdminArea"))
+    {
+        <h4 class="page-header">Sign In</h4><br />
+        <h5 class="page-header">To access this section requires an account with administrator privileges</h5><br />
+    }
+    else
+    {
+        <h4 class="page-header">Sign In</h4><br />
+    }
+    <div class="panel-body">
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary()
+            <div class="form-group">
+                <label>Login:</label>
+                @Html.TextBoxFor(m => m.Login, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Password:</label>
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            </div>
+            <input type="hidden" name="PreviousUrl" value="@Model.PreviousUrl" />
+            <input type="submit" value="Sign In" class="btn btn-primary" />
+
+        }
+        <br />
+        @Html.ActionLink("Sign Up, if you are not registered", "Signup", "Account")
+    </div>
+</center>

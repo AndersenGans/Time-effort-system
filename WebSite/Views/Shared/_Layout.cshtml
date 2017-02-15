@@ -1,0 +1,84 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Effort Time Tracking System</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/ETS")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/jquery-1.10.2.js")
+    @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
+    @Scripts.Render("~/Scripts/jquery.validate.min.js")
+    @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.js")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/js")
+    @Scripts.Render("~/bundles/jqueryui")
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("EFFORT TIME TRACKING SYSTEM", "Index", "TimeReports", new { area = "" }, new { @class = "navbar-brand" })
+
+            </div>
+            @if (User.Identity.IsAuthenticated)
+            {
+            <div class="navbar-right">
+                <h6 style="color:darkcyan">Current user: @User.Identity.Name</h6>
+            </div>
+            }
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Time Reports", "Index", "TimeReports")</li>
+                    <li>@Html.ActionLink("Approval", "Index", "Approval")</li>
+                    <li>@Html.ActionLink("Time effort", "Index", "TimeEffort")</li>
+                    <li>@Html.ActionLink("Project Management", "Index", "ProjectManagement")</li>
+                    <li>@Html.ActionLink("Admin Control Panel", "Index", "AdminArea")</li>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Sign In", "Login", "Account")</li>
+                    }
+                    else
+                    {
+                    <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - KHAI 611 PST</p>
+        </footer>
+    </div>
+
+
+
+    @* Скрипт для вывода Datepicker'a во всех браузерах *@
+    <script type="text/javascript">
+        $(function () {
+            if (!Modernizr.inputtypes.date) {
+                $(function () {
+                    $("input[type='date']")
+                                .datepicker({ dateFormat: 'dd/mm/yy' })
+                                .get(0).setAttribute("type", "text");
+                });
+            }
+        });
+    </script>
+</body>
+</html>

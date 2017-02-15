@@ -1,0 +1,16 @@
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.BLL\bin\Release\ETS.BLL.dll.config
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.BLL\bin\Release\ETS.BLL.dll
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.BLL\bin\Release\ETS.BLL.pdb
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.BLL\bin\Release\EntityFramework.dll
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.BLL\bin\Release\EntityFramework.SqlServer.dll
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.BLL\bin\Release\ETS.Contracts.dll
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.BLL\bin\Release\ETS.DAL.dll
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.BLL\bin\Release\ETS.Contracts.pdb
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.BLL\bin\Release\ETS.DAL.pdb
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.BLL\bin\Release\EntityFramework.xml
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.BLL\bin\Release\EntityFramework.SqlServer.xml
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.BLL\bin\Release\ru\EntityFramework.resources.dll
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.BLL\bin\Release\ru\EntityFramework.SqlServer.resources.dll
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.BLL\obj\Release\ETS.BLL.csprojResolveAssemblyReference.cache
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.BLL\obj\Release\ETS.BLL.dll
+D:\work\khai\sigma\ets_summer\Students603.ETS-development\ETS.BLL\obj\Release\ETS.BLL.pdb

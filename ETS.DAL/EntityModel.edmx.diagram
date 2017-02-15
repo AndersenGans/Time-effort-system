@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6b9f5df0415b4539ba1d6f1c901592a5" Name="Diagram1" ZoomLevel="94">
+        <EntityTypeShape EntityType="AppDatabaseModel.Account" Width="1.5" PointX="0.875" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AppDatabaseModel.Project" Width="1.5" PointX="6.125" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AppDatabaseModel.Report" Width="1.5" PointX="3.375" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AppDatabaseModel.Task" Width="1.5" PointX="6.125" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AppDatabaseModel.Roles" Width="1.5" PointX="3.375" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="AppDatabaseModel.FK__Report__AccountI__09A971A2" ManuallyRouted="false" />
+        <AssociationConnector Association="AppDatabaseModel.FK__Roles__AccountId__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="AppDatabaseModel.FK__Roles__ProjectId__06CD04F7" ManuallyRouted="false" />
+        <AssociationConnector Association="AppDatabaseModel.FK__Task__ProjectID__07C12930" ManuallyRouted="false" />
+        <AssociationConnector Association="AppDatabaseModel.FK__Report__TaskID__08B54D69" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
